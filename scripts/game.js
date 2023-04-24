@@ -136,39 +136,36 @@ class Game {
       
       };
     };
-  
-
   }
+
+/*   if (this.player.crashWith(this.teamRocketEnemies)) {
+    this.health -=1; */
+
+
+  
     checkGameOver() {
       if (this.health === 0) {
         ctx.fillStyle = "red";
         this.ctx.font = "72px Arial";
-        this.ctx.fillText("Game Over", 0, this.height / 2);
+        this.ctx.fillText("Game Over", 420, this.height / 2);
         this.stop();
       } else if (this.score === 20) {
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "blue";
         this.ctx.font = "72px Arial";
         ctx.fillText("You completed the pokedex", 135, 350);
         this.stop();
       }
-    }}
+  
+  
 
+   // Check for collision with teamRocketEnemies
 
-    /*const lose = this.health
     
-    if (lose === 0) {
-      ctx.fillStyle = "red";
-      this.ctx.font = "72px Arial";
-      this.ctx.fillText("Game Over", 0, this.height / 2);
-      ctx.fillText("You completed the pokedex", 135, 350);
-      this.ctx.fillText(`${this.score}`, 230, 400);
-      this.stop();
-
-      console.log("lost");
-    }
+  }
+}
 
 
-
+    
     /*
     //const crashed = this.teamRocketEnemies.some((enemy) => {
       return this.player.crashWith(enemy);
