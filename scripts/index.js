@@ -10,11 +10,11 @@ const startButton = document.getElementById("start");
 
 //Create the Player
 const player = new Component(0, 100, 25, 25, "black", ctx);
-
+let game;
 //Start Button on Click
 startButton.onclick = function () {
   console.log("starting");
-  const game = new Game(ctx, canvas.width, canvas.height, player);
+  game = new Game(ctx, canvas.width, canvas.height, player);
   game.start();
 };
 
@@ -33,8 +33,12 @@ document.addEventListener("keydown", (e) => {
     case "ArrowRight":
       player.speedX += 1;
       break;
+    case "KeyB":
+      game.throwBall();
+      break;
   }
 });
+
 /*
 addEventListener("keydown", (e) => {
   switch (e.code) {
@@ -45,12 +49,11 @@ addEventListener("keydown", (e) => {
   console.log("throw");
 });
   */
-document.addEventListener("keydown", (event) => {
+/* document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
-      this.throwBall();
-    }
-  });
 
+    }
+  }); */
 
 // Stop Speed
 document.addEventListener("keyup", () => {
