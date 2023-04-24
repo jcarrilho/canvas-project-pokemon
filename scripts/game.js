@@ -9,8 +9,8 @@ class Game {
     this.player = player;
     this.intervalId = null;
     this.frames = 0;
-    this.enemies = [];
-    // this.pokemons = []; // Add an array to hold Pokemon objects
+    this.teamRocketEnemies = [];
+    this.pokemons = []; // Add an array to hold Pokemon objects
     //this.balls = []; // Add an array to hold ball objects thrown by the player
     //this.score = 0; // Add a property to track the player's score
   }
@@ -26,7 +26,8 @@ class Game {
     this.clear();
     this.player.newPos();
     this.player.draw();
-    this.updateEnemies();
+    this.updateTeamRocketEnemies();
+    this.updatePokemons();
     this.checkGameOver();
   };
   // Stops The Game
@@ -39,36 +40,47 @@ class Game {
     //ctx.fillText(`Score ${this.score}`, 80, 30)
   }
 
-  // Updates Enemies
-  updateEnemies() {
-    for (let i = 0; i < this.enemies.length; i++) {
-      this.enemies[i].x -= 1; // Enemy goes More to The Right
-      this.enemies[i].draw(); // Continue to Draw Enemy
+  updatePokemons() {
+      for (let i = 0; i < this.pokemons.length; i++) {
+        this.pokemons[i].x -= 2; // Pokemons come from the right
+        this.pokemons[i].draw();
+  
+        // Remove pokemons that leave the canvas
+        if (this.pokemons[i].x < -this.pokemons[i].w) {
+          this.pokemons.splice(i, 1);
+          i--;
+        }
+      }
+  
+      // Add new pokemon every 200 frames
+      if (this.frames % 200 === 0) {
+        let x = this.width;
+        let y = Math.floor(Math.random() * (this.height - 50));
+        let pokemon = new Component(x, y, 50, 50, "green", this.ctx);
+        this.pokemons.push(pokemon);
+      }
     }
-
-    if (this.frames % 200 === 0) {
-      let x = 1200;
-      let minHeight = 5; // at least 20px of min Height
-      let maxHeight = 50; // max height of 400px
-
-      let height = Math.floor(
-        Math.random() * (maxHeight - minHeight + 1) + minHeight
-      );
-
-      let minGap = 95;
-      let maxGap = 200;
-
-      let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
-
-      // Top Obstacle
-      this.enemies.push(new Component(x, 0, 50, height, "red", this.ctx));
-
-      // Bottom Obstacle
-      this.enemies.push(
-        new Component(x, height + gap, 50, x - height - gap, "green", this.ctx)
-      );
+  
+    updateTeamRocketEnemies() {
+      for (let i = 0; i < this.teamRocketEnemies.length; i++) {
+        this.teamRocketEnemies[i].x -= 3; // Enemies come from the right faster
+        this.teamRocketEnemies[i].draw();
+  
+        // Remove enemies that leave the canvas
+        if (this.teamRocketEnemies[i].x < -this.teamRocketEnemies[i].w) {
+          this.teamRocketEnemies.splice(i, 1);
+          i--;
+        }
+      }
+  
+      // Add new enemy every 400 frames
+      if (this.frames % 400 === 0) {
+        let x = this.width;
+        let y = Math.floor(Math.random() * (this.height - 50));
+        let enemy = new Component(x, y, 50, 50, "red", this.ctx);
+        this.teamRocketEnemies.push(enemy);
+      }
     }
-  }
 
   checkGameOver() {
     const crashed = this.enemies.some((enemy) => {
