@@ -13,7 +13,7 @@ class Game {
     this.pokemons = []; // Add an array to hold Pokemon objects
     this.balls = []; // Add an array to hold ball objects thrown by the player
     this.score = 0; // Add a property to track the player's score
-    this.health = 0;
+    this.health = 2;
   }
 
   start() {
@@ -32,6 +32,7 @@ class Game {
     this.ctx.fillStyle = "black";
     this.ctx.font = "24px Arial";
     this.ctx.fillText(`Score: ${this.score}`, 20, 40); // Display the score
+    this.ctx.fillText(`Health: ${this.health}`, 1080, 40); // Display the health
     // this.checkGameOver();
   };
   // Stops The Game
@@ -123,6 +124,8 @@ class Game {
         if (this.balls[i].crashWith(this.teamRocketEnemies[j])) {
           this.balls.splice(i, 1);
           this.teamRocketEnemies.splice(j, 1);
+
+          this.health -=1;
      
         };
       };
@@ -137,20 +140,30 @@ class Game {
 
   }
   checkGameOver() {
-/*
+
+
+    const lose = this.health
+    
+    if (lose === 0) {
+      ctx.fillStyle = "red";
+      this.ctx.font = "72px Arial";
+      this.ctx.fillText("Game Over", 0, this.height / 2);
+      ctx.fillText("You completed the pokedex", 135, 350);
+      this.ctx.fillText(`${this.score}`, 230, 400);
+      this.stop();
+
+      console.log("lost");
+    }
+
+
+
+    /*
     //const crashed = this.teamRocketEnemies.some((enemy) => {
       return this.player.crashWith(enemy);
       
     })
 */
-    if ( this.score > 30) {
-      this.stop();
-      ctx.fillStyle = "red";
-      this.ctx.font = "72px Arial";
-      this.ctx.fillText("Game Over", 0, this.height / 2);
-      ctx.fillText("Your final score", 135, 350);
-      this.ctx.fillText(`${this.score}`, 230, 400);
-    }
+
 
   }
   }
