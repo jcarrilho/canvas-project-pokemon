@@ -11,7 +11,7 @@ class Game {
     this.frames = 0;
     this.teamRocketEnemies = [];
     this.pokemons = []; // Add an array to hold Pokemon objects
-    //this.balls = []; // Add an array to hold ball objects thrown by the player
+    this.balls = []; // Add an array to hold ball objects thrown by the player
     this.score = 0; // Add a property to track the player's score
   }
 
@@ -22,16 +22,17 @@ class Game {
   update = () => {
     this.frames++;
     // Updating Score
-    this.score += 1;
     this.clear();
+    this.createBackground();
     this.player.newPos();
     this.player.draw();
     this.updateTeamRocketEnemies();
     this.updatePokemons();
+    this.updateBalls();
     this.ctx.fillStyle = "black";
     this.ctx.font = "24px Arial";
     this.ctx.fillText(`Score: ${this.score}`, 20, 40); // Display the score
-    this.checkGameOver();
+   // this.checkGameOver();
   };
   // Stops The Game
   stop() {
@@ -42,6 +43,16 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
     //ctx.fillText(`Score ${this.score}`, 80, 30)
   }
+
+   createBackground(){
+        const img = new Image();
+        img.addEventListener('load', ()=>{
+            this.img = img;
+        });
+
+        img.src= "../images/background.jpeg";
+        this.ctx.drawImage(img, 0, 0, this.width, this.height); 
+      }
 
   updatePokemons() {
     for (let i = 0; i < this.pokemons.length; i++) {
@@ -59,7 +70,7 @@ class Game {
     if (this.frames % 200 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
-      let pokemon = new Component(x, y, 50, 50, "green", this.ctx);
+      let pokemon = new Component(x, y, 20, 20, "green", this.ctx);
       this.pokemons.push(pokemon);
     }
   }
@@ -85,6 +96,52 @@ class Game {
     }
   }
 
+  
+
+ 
+throwBall() {
+  let x = this.player.x + this.player.w; // Position the ball at the player's position
+  let y = this.player.y + this.player.h / 2;
+  let ball = new Component(x, y, 10, 10, "blue", this.ctx);
+  ball.speedX = 5; // Set the speed of the ball
+  this.balls.push(ball);
+}
+
+updateBalls() {
+  for (let i = 0; i < this.balls.length; i++) {
+    this.balls[i].move();
+    this.balls[i].draw();
+
+    // Check for collision with pokemons
+    for (let j = 0; j < this.pokemons.length; j++) {
+      if (this.balls[i].crashWith(this.pokemons[j])) {
+        this.balls.splice(i, 1);
+        i--;
+        this.pokemons.splice(j, 1);
+        j--;
+        this.score += 10; // Increase the score for each caught pokemon
+        break; // Exit the inner loop after a collision is found
+      }
+    }
+
+    // Check for collision with teamRocketEnemies
+    for (let j = 0; j < this.teamRocketEnemies.length; j++) {
+      if (this.balls[i].crashWith(this.teamRocketEnemies[j])) {
+        this.balls.splice(i, 1);
+        i--;
+        this.teamRocketEnemies.splice(j, 1);
+        j--;
+        break; // Exit the inner loop after a collision is found
+      }
+    }
+
+    // Remove balls that leave the canvas
+    if (this.balls[i].x > this.width) {
+    this.balls.splice(i, 1);
+    i--;
+  }
+}
+/*
   checkGameOver() {
     const crashed = this.teamRocketEnemies.some((enemy) => {
       return this.player.crashWith(enemy);
@@ -99,4 +156,13 @@ class Game {
       this.ctx.fillText(`${this.score}`, 230, 400);
     }
   }
+  */
 }
+}
+
+
+
+
+
+
+
