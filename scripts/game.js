@@ -33,7 +33,7 @@ class Game {
     this.ctx.font = "24px Arial";
     this.ctx.fillText(`Score: ${this.score}`, 20, 40); // Display the score
     this.ctx.fillText(`Health: ${this.health}`, 1080, 40); // Display the health
-    // this.checkGameOver();
+    this.checkGameOver();
   };
   // Stops The Game
   stop() {
@@ -139,10 +139,22 @@ class Game {
   
 
   }
-  checkGameOver() {
+    checkGameOver() {
+      if (this.health === 0) {
+        ctx.fillStyle = "red";
+        this.ctx.font = "72px Arial";
+        this.ctx.fillText("Game Over", 0, this.height / 2);
+        this.stop();
+      } else if (this.score === 20) {
+        ctx.fillStyle = "red";
+        this.ctx.font = "72px Arial";
+        ctx.fillText("You completed the pokedex", 135, 350);
+        this.stop();
+      }
+    }}
 
 
-    const lose = this.health
+    /*const lose = this.health
     
     if (lose === 0) {
       ctx.fillStyle = "red";
@@ -165,6 +177,4 @@ class Game {
 */
 
 
-  }
-  }
-
+  
