@@ -70,10 +70,10 @@ class Game {
     if (this.frames % 200 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
-      let pokemon = new Component(x, y, 20, 20, "green", this.ctx);
+      let pokemon = new Component(x, y, 20, 20, "pokemons", this.ctx);
       this.pokemons.push(pokemon);
     }
-
+      // Check for collision with pokemons
     for (let i = 0; i < this.pokemons.length; i++) {
       if (this.player.crashWith(this.pokemons[i])) {
         this.health--;
@@ -93,14 +93,14 @@ class Game {
       };
     }
 
-    // Add new enemy every 400 frames
+    // Add new enemy every 300 frames
     if (this.frames % 300 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
-      let enemy = new Component(x, y, 40, 40, "red", this.ctx);
+      let enemy = new Component(x, y, 40, 40, "teamRocketEnemies", this.ctx);
       this.teamRocketEnemies.push(enemy);
     };
-
+      // Check for collision with teamRocketEnemies
     for (let i = 0; i < this.teamRocketEnemies.length; i++) {
       if (this.player.crashWith(this.teamRocketEnemies[i])) {
         this.health--;
@@ -113,7 +113,7 @@ class Game {
     let x = this.player.x + this.player.w; // Position the ball at the player's position
     let y = this.player.y + this.player.h / 2;
 
-    this.balls.push(new Component(x, y, 10, 10, "blue", this.ctx));
+    this.balls.push(new Component(x, y, 10, 10, "ball", this.ctx));
   }
 
   updateBalls() {
@@ -152,10 +152,6 @@ class Game {
       };
     };
   }
-
-  
-
-
   
     checkGameOver() {
       if (this.health === 0) {
@@ -168,24 +164,10 @@ class Game {
         this.ctx.font = "72px Arial";
         ctx.fillText("You completed the pokedex", 135, 350);
         this.stop();
-      }
-  
-  
-
-   // Check for collision with teamRocketEnemies
-
-    
+      }  
   }
 }
 
 
     
-    /*
-    //const crashed = this.teamRocketEnemies.some((enemy) => {
-      return this.player.crashWith(enemy);
-      
-    })
-*/
-
-
-  
+    
