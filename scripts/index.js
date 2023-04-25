@@ -44,3 +44,10 @@ document.addEventListener("keyup", () => {
   player.speedX = 0;
   player.speedY = 0;
 });
+
+
+
+
+
+
+

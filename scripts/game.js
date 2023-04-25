@@ -51,7 +51,7 @@ class Game {
       this.img = img;
     });
 
-    img.src = "../images/background.jpeg";
+    img.src = "../images/pokemon-arena-1.png";
     this.ctx.drawImage(img, 0, 0, this.width, this.height);
   };
 
