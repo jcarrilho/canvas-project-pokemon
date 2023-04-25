@@ -73,6 +73,13 @@ class Game {
       let pokemon = new Component(x, y, 20, 20, "green", this.ctx);
       this.pokemons.push(pokemon);
     }
+
+    for (let i = 0; i < this.pokemons.length; i++) {
+      if (this.player.crashWith(this.pokemons[i])) {
+        this.health--;
+        this.pokemons.splice(i, 1);
+      }
+    }
   }
 
   updateTeamRocketEnemies() {
@@ -93,6 +100,13 @@ class Game {
       let enemy = new Component(x, y, 40, 40, "red", this.ctx);
       this.teamRocketEnemies.push(enemy);
     };
+
+    for (let i = 0; i < this.teamRocketEnemies.length; i++) {
+      if (this.player.crashWith(this.teamRocketEnemies[i])) {
+        this.health--;
+        this.teamRocketEnemies.splice(i, 1);
+      }
+    }
   };
 
   throwBall() {
@@ -120,6 +134,7 @@ class Game {
       }
 
       // Check for collision with teamRocketEnemies
+
       for (let j = 0; j < this.teamRocketEnemies.length; j++) {
         if (this.balls[i].crashWith(this.teamRocketEnemies[j])) {
           this.balls.splice(i, 1);
@@ -138,8 +153,7 @@ class Game {
     };
   }
 
-/*   if (this.player.crashWith(this.teamRocketEnemies)) {
-    this.health -=1; */
+  
 
 
   
