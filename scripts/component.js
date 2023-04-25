@@ -14,7 +14,7 @@ class Component {
   }
   draw() {
     const img = new Image();
-    img.addEventListener("load", () => {
+    img.addEventListener("click", () => {
       this.img = img;
     });
     if (this.character === "player") {
@@ -22,34 +22,41 @@ class Component {
     } else if (this.character === "pokemons") {
       img.src = "../images/pokemon.png";
     } else if (this.character === "teamRocketEnemies") {
-      img.src = "../images/teamRocket.png";
+      img.src = "../images/jessie-crop.png";
     } else if (this.character === "ball") {
-        img.src = "../images/pokeball.png";
+        img.src = "../images/pokeball-crop.png";
       }
     
     this.ctx.drawImage(img, this.x, this.y, this.w, this.h);
   }
-  /* draw() {
-    if (this.img) {
-      // Creating new Image and Load
-      const img = new Image();
-      img.addEventListener("load", () => {
-        this.img = img;
-      });
-      // Source Image
-      img.src = "../images/ash.png";
-      this.ctx.drawImage(img, this.x, this.y, this.w, this.h);
-    } else {
-      this.ctx.fillStyle = this.color;
-      this.ctx.fillRect(this.x, this.y, this.w, this.h);
-    }
-  } */
-
 
   newPos() {
+    if (player.x < 0) {
+        player.x = 0;
+        player.speedX = 0;
+    }
+    else if(player.x + player.w > canvas.width){
+      player.x = canvas.width - player.w;
+      player.speedX=0;
+    }
+    if (player.y < 0) {
+        player.y = 0;
+        player.speedY = 0;
+    }
+    else if(player.y + player.h > canvas.height){
+      player.y = canvas.height - player.h;
+      player.speedY = 0;
+    }
+      this.x += this.speedX;
+      this.y += this.speedY;
+    }
+  
+/* 
+  newPos() {
+
     this.x += this.speedX;
     this.y += this.speedY;
-  }
+  } */
   top() {
     return this.y;
   }

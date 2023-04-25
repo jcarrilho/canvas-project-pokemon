@@ -70,7 +70,7 @@ class Game {
     if (this.frames % 200 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
-      let pokemon = new Component(x, y, 20, 20, "pokemons", this.ctx);
+      let pokemon = new Component(x, y, 80, 80, "pokemons", this.ctx);
       this.pokemons.push(pokemon);
     }
       // Check for collision with pokemons
@@ -97,7 +97,7 @@ class Game {
     if (this.frames % 300 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
-      let enemy = new Component(x, y, 40, 40, "teamRocketEnemies", this.ctx);
+      let enemy = new Component(x, y, 100, 100, "teamRocketEnemies", this.ctx);
       this.teamRocketEnemies.push(enemy);
     };
       // Check for collision with teamRocketEnemies
@@ -113,12 +113,12 @@ class Game {
     let x = this.player.x + this.player.w; // Position the ball at the player's position
     let y = this.player.y + this.player.h / 2;
 
-    this.balls.push(new Component(x, y, 10, 10, "ball", this.ctx));
+    this.balls.push(new Component(x, y, 20, 20, "ball", this.ctx));
   }
 
   updateBalls() {
     for (let i = 0; i < this.balls.length; i++) {
-      this.balls[i].x += 1;
+      this.balls[i].x += 3;
       this.balls[i].newPos();
       this.balls[i].draw();
 
