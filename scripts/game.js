@@ -12,7 +12,7 @@ class Game {
     this.teamRocketEnemies = [];
     this.pokemons = []; // Add an array to hold Pokemon objects
     this.balls = []; // Add an array to hold ball objects thrown by the player
-    this.score = 0; // Add a property to track the player's score
+    this.score = 1; // Add a property to track the player's score
     this.health = 2;
   }
 
@@ -66,8 +66,8 @@ class Game {
       };
     }
 
-    // Add new pokemon every 200 frames
-    if (this.frames % 200 === 0) {
+    // Add new pokemon every 150 frames
+    if (this.frames % 150 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
       let pokemon = new Component(x, y, 80, 80, "pokemons", this.ctx);
@@ -93,8 +93,8 @@ class Game {
       };
     }
 
-    // Add new enemy every 300 frames
-    if (this.frames % 300 === 0) {
+    // Add new enemy every 250 frames
+    if (this.frames % 250 === 0) {
       let x = this.width;
       let y = Math.floor(Math.random() * (this.height - 50));
       let enemy = new Component(x, y, 100, 100, "teamRocketEnemies", this.ctx);
@@ -118,7 +118,7 @@ class Game {
 
   updateBalls() {
     for (let i = 0; i < this.balls.length; i++) {
-      this.balls[i].x += 3;
+      this.balls[i].x += 4;
       this.balls[i].newPos();
       this.balls[i].draw();
 
@@ -159,7 +159,7 @@ class Game {
         this.ctx.font = "72px Arial";
         this.ctx.fillText("Game Over", 420, this.height / 2);
         this.stop();
-      } else if (this.score === 20) {
+      } else if (this.score > 150) {
         ctx.fillStyle = "blue";
         this.ctx.font = "72px Arial";
         ctx.fillText("You completed the pokedex", 135, 350);

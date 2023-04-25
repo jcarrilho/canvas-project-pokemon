@@ -18,11 +18,11 @@ class Component {
       this.img = img;
     });
     if (this.character === "player") {
-      img.src = "../images/ash.png";
+      img.src = "../images/ash-3.png";
     } else if (this.character === "pokemons") {
-      img.src = "../images/pokemon.png";
+      img.src = "../images/Darkrai.png";
     } else if (this.character === "teamRocketEnemies") {
-      img.src = "../images/jessie-crop.png";
+      img.src = "../images/giovanni-crop.png";
     } else if (this.character === "ball") {
         img.src = "../images/pokeball-crop.png";
       }

@@ -9,7 +9,7 @@ const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("start");
 
 //Create the Player
-const player = new Component(0, 100, 70, 70, "player", ctx);
+const player = new Component(0, 100, 80, 80, "player", ctx);
 let game;
 //Start Button on Click
 startButton.onclick = function () {
