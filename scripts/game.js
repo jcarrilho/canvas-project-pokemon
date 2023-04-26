@@ -156,12 +156,12 @@ class Game {
     checkGameOver() {
       if (this.health === 0) {
         ctx.fillStyle = "red";
-        this.ctx.font = "72px Arial";
+        this.ctx.font = "72px myFirstFont";
         this.ctx.fillText("Game Over", 420, this.height / 2);
         this.stop();
       } else if (this.score > 150) {
         ctx.fillStyle = "blue";
-        this.ctx.font = "72px Arial";
+        this.ctx.font = "72px myFirstFont";
         ctx.fillText("You completed the pokedex", 135, 350);
         this.stop();
       }  

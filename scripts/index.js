@@ -18,6 +18,17 @@ startButton.onclick = function () {
   game.start();
 };
 
+let myFirstFont = new FontFace('myFirstFont', 'url(font/PokemonHollow.ttf)')
+myFirstFont.load().then(function(font) {
+document.fonts.add(font)
+})
+
+let mySecondFont = new FontFace('mySecondFont', 'url(font/PokemonSolid.ttf)')
+mySecondFont.load().then(function(font) {
+document.fonts.add(font)
+})
+
+
 // Move the Player
 document.addEventListener("keydown", (e) => {
   switch (e.code) {
