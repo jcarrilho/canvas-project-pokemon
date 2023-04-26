@@ -12,10 +12,25 @@ const startButton = document.getElementById("start");
 const player = new Component(0, 100, 80, 80, "player", ctx);
 let game;
 //Start Button on Click
-startButton.onclick = function () {
-  console.log("starting");
-  game = new Game(ctx, canvas.width, canvas.height, player);
+window.onload = () => {
+  document.getElementById('start').onclick = () => {
+    startGame();
+    document.getElementById('game-intro').style.display = 'none';
+    document.getElementById('game-board').style.display = 'block';
+  };
+
+  document.getElementById('restart-button').onclick = () => {
+    startGame();
+    document.getElementById('game-end').style.display = 'none';
+    document.getElementById('game-board').style.display = 'block';
+    game.song.play();
+  };
+
+  function startGame() {
+    game = new Game(ctx, canvas.width, canvas.height, player);
   game.start();
+
+  }
 };
 
 let myFirstFont = new FontFace('myFirstFont', 'url(font/PokemonHollow.ttf)')
@@ -55,7 +70,6 @@ document.addEventListener("keyup", () => {
   player.speedX = 0;
   player.speedY = 0;
 });
-
 
 
 

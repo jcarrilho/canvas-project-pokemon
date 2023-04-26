@@ -8,18 +8,23 @@
     <title>Pokemon Game</title>
 </head>
 <body>
-    <div class="header">
+
+    <div id="game-intro">
         <img src="./images/title.png" width="1000">
+        <button id="start">Start Game</button>
+        <button id="instructions">Instructions</button>
     </div>
 
-    <button id="start">Start Game</button>
+    <div id="game-board">
+        <canvas style="border: 2px solid whitesmoke" id="canvas" width="1500px" height="750px"></canvas>
+    </div>
 
-    <button id="instructions">Instructions</button>
+    <div id="game-end">
+        <button id="restart-button">Restart</button>
+    </div>
 
-    <canvas id="canvas" width="1200" height="600"></canvas>
     <script src="./scripts/component.js"></script>
     <script src="./scripts/index.js"></script>
     <script src="./scripts/game.js"></script>
 </body>
 </html>
-
