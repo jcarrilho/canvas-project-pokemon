@@ -1,6 +1,9 @@
 // JS Initialization
 console.log("Game is loaded");
 
+let backgroundMusic = new Audio("../audio/background.mp3");
+backgroundMusic.loop = false;
+
 class Game {
   constructor(ctx, width, height, player) {
     this.ctx = ctx;
@@ -13,11 +16,20 @@ class Game {
     this.pokemons = []; // Add an array to hold Pokemon objects
     this.balls = []; // Add an array to hold ball objects thrown by the player
     this.score = 1; // Add a property to track the player's score
-    this.health = 2;
+    this.health = 3;
+    this.crash = new Audio("../audio/collsion.mp3");
+    this.crash.loop = false;
+    this.catch = new Audio("../audio/catch-pokemon.mp3");
+    this.catch.loop = false;
+    this.throwingEnemy = new Audio("../audio/.mp3");
+    this.throwingEnemy.loop = false;
+    this.winning = new Audio("../audio/theme-song.mp3");
+    this.winning.loop = false;
   }
 
   start() {
     this.intervalId = setInterval(this.update, 10);
+    backgroundMusic.play();
   }
 
   update = () => {
@@ -29,15 +41,40 @@ class Game {
     this.updateTeamRocketEnemies();
     this.updatePokemons();
     this.updateBalls();
+   this.ctx.font = "33px myFirstFont";
+    this.ctx.fillStyle = "white";
+
+    // Width and height of the text
+    const scoreText = `Pokedex: ${this.score}`;
+    const scoreWidth = this.ctx.measureText(scoreText).width;
+    const scoreHeight = 24;
+
+    const healthText = `Health: ${this.health}`;
+    const healthWidth = this.ctx.measureText(healthText).width;
+    const healthHeight = 24; 
+
+    // Background for the score
+    this.ctx.fillStyle = "#FFCB05";
+    this.ctx.fillRect(30, 25, scoreWidth + 28, scoreHeight + 20);
+
+    // Draw the score text
     this.ctx.fillStyle = "black";
-    this.ctx.font = "24px Arial";
-    this.ctx.fillText(`Score: ${this.score}`, 20, 40); // Display the score
-    this.ctx.fillText(`Health: ${this.health}`, 1080, 40); // Display the health
+    this.ctx.fillText(scoreText, 40, 60);
+
+    // Draw the background for the health
+    this.ctx.fillStyle = "#02569B"; 
+    this.ctx.fillRect(1470 - healthWidth - 35, 25, healthWidth + 28, healthHeight + 20);
+
+    // Draw the health text
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(healthText, 1300, 60);
     this.checkGameOver();
   };
   // Stops The Game
   stop() {
     clearInterval(this.intervalId);
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
   };
   // Clears Canvas
   clear() {
@@ -51,7 +88,7 @@ class Game {
       this.img = img;
     });
 
-    img.src = "../images/pokemon-arena-1.png";
+    img.src = "../docs/assets/images/pokemon-arena-1.png";
     this.ctx.drawImage(img, 0, 0, this.width, this.height);
   };
 
@@ -76,6 +113,7 @@ class Game {
       // Check for collision with pokemons
     for (let i = 0; i < this.pokemons.length; i++) {
       if (this.player.crashWith(this.pokemons[i])) {
+        this.crash.play();
         this.health--;
         this.pokemons.splice(i, 1);
       }
@@ -103,6 +141,7 @@ class Game {
       // Check for collision with teamRocketEnemies
     for (let i = 0; i < this.teamRocketEnemies.length; i++) {
       if (this.player.crashWith(this.teamRocketEnemies[i])) {
+        this.crash.play();
         this.health--;
         this.teamRocketEnemies.splice(i, 1);
       }
@@ -125,10 +164,11 @@ class Game {
       // Check for collision with pokemons
       for (let j = 0; j < this.pokemons.length; j++) {
         if (this.balls[i].crashWith(this.pokemons[j])) {
+          this.catch.play();
           this.balls.splice(i, 1);
           this.pokemons.splice(j, 1);
        
-          this.score += 10; // Increase the score for each caught pokemon
+          this.score += 5; // Increase the score for each caught pokemon
 
         }
       }
@@ -137,6 +177,7 @@ class Game {
 
       for (let j = 0; j < this.teamRocketEnemies.length; j++) {
         if (this.balls[i].crashWith(this.teamRocketEnemies[j])) {
+          this.throwingEnemy.play();
           this.balls.splice(i, 1);
           this.teamRocketEnemies.splice(j, 1);
 
@@ -157,25 +198,27 @@ class Game {
       if (this.health === 0) {
         ctx.fillStyle = "red";
         this.ctx.font = "72px myFirstFont";
-        this.ctx.fillText("Game Over", 420, this.height / 2);
+        this.ctx.fillText("Game Over", 600, this.height / 2);
 
         setTimeout(()=>{
           document.getElementById('game-end').style.display = 'block';
           document.getElementById('game-board').style.display = 'none';
-        },500)
+        },1000)
 
         this.stop();
       } else if (this.score > 150) {
+        this.winning.play();
         ctx.fillStyle = "blue";
         this.ctx.font = "72px myFirstFont";
-        ctx.fillText("You completed the pokedex", 135, 350);
+        ctx.fillText("You completed the pokedex", 350, 350);
 
         setTimeout(()=>{
           document.getElementById('game-end').style.display = 'block';
           document.getElementById('game-board').style.display = 'none';
-        },500)
+        },1000)
 
         this.stop();
       }  
   }
+
 }

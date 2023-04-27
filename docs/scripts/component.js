@@ -41,16 +41,16 @@ class Component {
       this.img = img;
     });
     if (this.character === "player") {
-      img.src = "../images/ash-pixel.png";
+      img.src = "../docs/assets/images/ash-pixel.png";
     } else if (this.character === "pokemons") {
       if (this.characterIndex === null) {
         this.characterIndex = Math.floor(Math.random() * 150);
       }
-      img.src = `../images/pokemons/${this.characterIndex}.png`;
+      img.src = `../docs/assets/images/pokemons/${this.characterIndex}.png`;
     } else if (this.character === "teamRocketEnemies") {
-      img.src = "../images/giovanni-crop.png";
+      img.src = "../docs/assets/images/giovanni-crop.png";
     } else if (this.character === "ball") {
-      img.src = "../images/pokeball-crop.png";
+      img.src = "../docs/assets/images/pokeball-crop.png";
     }
 
     this.ctx.drawImage(img, this.x, this.y, this.w, this.h);
