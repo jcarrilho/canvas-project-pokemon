@@ -27,30 +27,35 @@ class Component {
     });
     document.addEventListener("keyup", (event) => {
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        player.speedX = player.speedX > 0 ? player.speedX - player.friction : player.speedX + player.friction;
+        player.speedX =
+          player.speedX > 0
+            ? player.speedX - player.friction
+            : player.speedX + player.friction;
       } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-        player.speedY = player.speedY > 0 ? player.speedY - player.friction : player.speedY + player.friction;
+        player.speedY =
+          player.speedY > 0
+            ? player.speedY - player.friction
+            : player.speedY + player.friction;
       }
     });
   }
 
-  
   draw() {
     const img = new Image();
     img.addEventListener("click", () => {
       this.img = img;
     });
     if (this.character === "player") {
-      img.src = "../docs/assets/images/ash-pixel.png";
+      img.src = "/docs/assets/images/ash-pixel.png";
     } else if (this.character === "pokemons") {
       if (this.characterIndex === null) {
         this.characterIndex = Math.floor(Math.random() * 150);
       }
-      img.src = `../docs/assets/images/pokemons/${this.characterIndex}.png`;
+      img.src = `/docs/assets/images/pokemons/${this.characterIndex}.png`;
     } else if (this.character === "teamRocketEnemies") {
-      img.src = "../docs/assets/images/giovanni-crop.png";
+      img.src = "/docs/assets/images/giovanni-crop.png";
     } else if (this.character === "ball") {
-      img.src = "../docs/assets/images/pokeball-crop.png";
+      img.src = "/docs/assets/images/pokeball-crop.png";
     }
 
     this.ctx.drawImage(img, this.x, this.y, this.w, this.h);
