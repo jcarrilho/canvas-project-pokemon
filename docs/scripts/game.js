@@ -21,7 +21,7 @@ class Game {
     this.crash.loop = false;
     this.catch = new Audio("../docs/assets/audio/catch-pokemon.mp3");
     this.catch.loop = false;
-    this.throwingEnemy = new Audio("../docs/assets/audio/.mp3");
+    this.throwingEnemy = new Audio("../docs/assets/audio/hit.mp3");
     this.throwingEnemy.loop = false;
     this.winning = new Audio("../docs/assets/audio/theme-song.mp3");
     this.winning.loop = false;
@@ -206,7 +206,7 @@ class Game {
         },1000)
 
         this.stop();
-      } else if (this.score > 150) {
+      } else if (this.score > 5) {
         this.winning.play();
         ctx.fillStyle = "blue";
         this.ctx.font = "72px myFirstFont";
