@@ -10,9 +10,31 @@ class Component {
     this.ctx = ctx;
     this.speedX = 0;
     this.speedY = 0;
+    this.acceleration = 1.9; // adjust as necessary
+    this.friction = 0.1; // adjust as necessary
     this.characterIndex = null;
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        player.speedX = -player.acceleration;
+      } else if (event.key === "ArrowRight") {
+        player.speedX = player.acceleration;
+      } else if (event.key === "ArrowUp") {
+        player.speedY = -player.acceleration;
+      } else if (event.key === "ArrowDown") {
+        player.speedY = player.acceleration;
+      }
+    });
+    document.addEventListener("keyup", (event) => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        player.speedX = player.speedX > 0 ? player.speedX - player.friction : player.speedX + player.friction;
+      } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+        player.speedY = player.speedY > 0 ? player.speedY - player.friction : player.speedY + player.friction;
+      }
+    });
   }
 
+  
   draw() {
     const img = new Image();
     img.addEventListener("click", () => {

@@ -1,15 +1,14 @@
-// JS Initialization
-console.log("JS is loaded");
+	// JS Initialization
+  console.log("JS is loaded");
+  // Canvas Initialization
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  //Start Button
+  const startButton = document.getElementById("start");
 
-// Canvas Initialization
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
-//Start Button
-const startButton = document.getElementById("start");
-
+  
 //Create the Player
-const player = new Component(0, 100, 80, 80, "player", ctx);
+let player = new Component(0, 100, 80, 80, "player", ctx);
 let game;
 //Start Button on Click
 window.onload = () => {
@@ -19,11 +18,11 @@ window.onload = () => {
     document.getElementById('game-board').style.display = 'block';
   };
 
-  document.getElementById('restart-button').onclick = () => {
+  document.getElementById('restart').onclick = () => {
+    player = new Component(0, 100, 80, 80, "player", ctx);
     startGame();
     document.getElementById('game-end').style.display = 'none';
     document.getElementById('game-board').style.display = 'block';
-    game.song.play();
   };
 
   function startGame() {
@@ -70,8 +69,3 @@ document.addEventListener("keyup", () => {
   player.speedX = 0;
   player.speedY = 0;
 });
-
-
-
-
-

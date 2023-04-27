@@ -158,16 +158,24 @@ class Game {
         ctx.fillStyle = "red";
         this.ctx.font = "72px myFirstFont";
         this.ctx.fillText("Game Over", 420, this.height / 2);
+
+        setTimeout(()=>{
+          document.getElementById('game-end').style.display = 'block';
+          document.getElementById('game-board').style.display = 'none';
+        },500)
+
         this.stop();
       } else if (this.score > 150) {
         ctx.fillStyle = "blue";
         this.ctx.font = "72px myFirstFont";
         ctx.fillText("You completed the pokedex", 135, 350);
+
+        setTimeout(()=>{
+          document.getElementById('game-end').style.display = 'block';
+          document.getElementById('game-board').style.display = 'none';
+        },500)
+
         this.stop();
       }  
   }
 }
-
-
-    
-    
