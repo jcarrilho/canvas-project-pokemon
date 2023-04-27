@@ -32,7 +32,7 @@ window.onload = () => {
 
 let myFirstFont = new FontFace(
   "myFirstFont",
-  "url(/docs/styles/font/PokemonHollow.ttf)"
+  "url(docs/styles/font/PokemonHollow.ttf)"
 );
 myFirstFont.load().then(function (font) {
   document.fonts.add(font);
@@ -40,7 +40,7 @@ myFirstFont.load().then(function (font) {
 
 let mySecondFont = new FontFace(
   "mySecondFont",
-  "url(/docs/styles/font/PokemonSolid.ttf)"
+  "url(docs/styles/font/PokemonSolid.ttf)"
 );
 mySecondFont.load().then(function (font) {
   document.fonts.add(font);
