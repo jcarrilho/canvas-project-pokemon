@@ -1,7 +1,7 @@
 // JS Initialization
 console.log("Game is loaded");
 
-let backgroundMusic = new Audio("../audio/background.mp3");
+let backgroundMusic = new Audio("../docs/assets/audio/background.mp3");
 backgroundMusic.loop = false;
 
 class Game {
@@ -17,13 +17,13 @@ class Game {
     this.balls = []; // Add an array to hold ball objects thrown by the player
     this.score = 1; // Add a property to track the player's score
     this.health = 3;
-    this.crash = new Audio("../audio/collsion.mp3");
+    this.crash = new Audio("../docs/assets/audio/collsion.mp3");
     this.crash.loop = false;
-    this.catch = new Audio("../audio/catch-pokemon.mp3");
+    this.catch = new Audio("../docs/assets/audio/catch-pokemon.mp3");
     this.catch.loop = false;
-    this.throwingEnemy = new Audio("../audio/.mp3");
+    this.throwingEnemy = new Audio("../docs/assets/audio/.mp3");
     this.throwingEnemy.loop = false;
-    this.winning = new Audio("../audio/theme-song.mp3");
+    this.winning = new Audio("../docs/assets/audio/theme-song.mp3");
     this.winning.loop = false;
   }
 
