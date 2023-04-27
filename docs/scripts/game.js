@@ -1,7 +1,7 @@
 // JS Initialization
 console.log("Game is loaded");
 
-let backgroundMusic = new Audio("docs/assets/audio/background.mp3");
+let backgroundMusic = new Audio("docs/assets/audio/background-1.mp3");
 backgroundMusic.loop = false;
 
 class Game {
@@ -19,7 +19,7 @@ class Game {
     this.health = 3;
     this.crash = new Audio("docs/assets/audio/collsion.mp3");
     this.crash.loop = false;
-    this.catch = new Audio("docs/assets/audio/catch-pokemon.mp3");
+    this.catch = new Audio("docs/assets/audio/pokeball-sound.mp3");
     this.catch.loop = false;
     this.throwingEnemy = new Audio("docs/assets/audio/hit.mp3");
     this.throwingEnemy.loop = false;
@@ -111,7 +111,7 @@ class Game {
     // Add new pokemon every 150 frames
     if (this.frames % 150 === 0) {
       let x = this.width;
-      let y = Math.floor(Math.random() * (this.height - 50));
+      let y = Math.floor(Math.random() * (this.height - 60));
       let pokemon = new Component(x, y, 80, 80, "pokemons", this.ctx);
       this.pokemons.push(pokemon);
     }
@@ -139,7 +139,7 @@ class Game {
     // Add new enemy every 250 frames
     if (this.frames % 250 === 0) {
       let x = this.width;
-      let y = Math.floor(Math.random() * (this.height - 50));
+      let y = Math.floor(Math.random() * (this.height - 60));
       let enemy = new Component(x, y, 100, 100, "teamRocketEnemies", this.ctx);
       this.teamRocketEnemies.push(enemy);
     }
@@ -208,7 +208,7 @@ class Game {
       }, 1000);
 
       this.stop();
-    } else if (this.score > 5) {
+    } else if (this.score > 100) {
       this.winning.play();
       ctx.fillStyle = "blue";
       this.ctx.font = "72px myFirstFont";

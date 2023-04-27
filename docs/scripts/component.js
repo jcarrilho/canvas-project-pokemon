@@ -63,14 +63,14 @@ class Component {
 
   newPos() {
     if (player.x < 0) {
-      player.x = 1;
+      player.x = 0;
       player.speedX = 0;
     } else if (player.x + player.w > canvas.width) {
       player.x = canvas.width - player.w;
       player.speedX = 0;
     }
     if (player.y < 0) {
-      player.y = 2;
+      player.y = 0;
       player.speedY = 0;
     } else if (player.y + player.h > canvas.height) {
       player.y = canvas.height - player.h;

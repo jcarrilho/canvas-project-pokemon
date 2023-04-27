@@ -53,8 +53,8 @@ body {
 }
 
 #game-end img {
-  height: 140px;
-  width: 160px;
+  height: 700px;
+  width: 1100px;
 }
 
 #game-intro {
@@ -85,8 +85,10 @@ button {
   box-shadow: 2px 2px 0px 0px #bdbdbd;
 }
 
+
 #restart {
   background-color: #fdb813;
-  color: #000000;
-  box-shadow: 2px 2px 0px 0px #bdbdbd;
+  color: #000000; 
+  margin: 20px auto 0;
+  display: block;
 }
