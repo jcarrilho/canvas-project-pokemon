@@ -2,7 +2,7 @@
 console.log("Game is loaded");
 
 let backgroundMusic = new Audio("docs/assets/audio/background-1.mp3");
-backgroundMusic.loop = false;
+backgroundMusic.loop = true;
 
 class Game {
   constructor(ctx, width, height, player) {
@@ -108,10 +108,10 @@ class Game {
       }
     }
 
-    // Add new pokemon every 150 frames
-    if (this.frames % 150 === 0) {
+    // Add new pokemon every 120 frames
+    if (this.frames % 120 === 0) {
       let x = this.width;
-      let y = Math.floor(Math.random() * (this.height - 60));
+      let y = Math.floor(Math.random() * (this.height - 70));
       let pokemon = new Component(x, y, 80, 80, "pokemons", this.ctx);
       this.pokemons.push(pokemon);
     }
@@ -137,9 +137,9 @@ class Game {
     }
 
     // Add new enemy every 250 frames
-    if (this.frames % 250 === 0) {
+    if (this.frames % 220 === 0) {
       let x = this.width;
-      let y = Math.floor(Math.random() * (this.height - 60));
+      let y = Math.floor(Math.random() * (this.height - 100));
       let enemy = new Component(x, y, 100, 100, "teamRocketEnemies", this.ctx);
       this.teamRocketEnemies.push(enemy);
     }
@@ -208,7 +208,7 @@ class Game {
       }, 1000);
 
       this.stop();
-    } else if (this.score > 100) {
+    } else if (this.score > 150) {
       this.winning.play();
       ctx.fillStyle = "blue";
       this.ctx.font = "72px myFirstFont";
@@ -217,7 +217,7 @@ class Game {
       setTimeout(() => {
         document.getElementById("game-end").style.display = "block";
         document.getElementById("game-board").style.display = "none";
-      }, 1000);
+      }, 3000);
 
       this.stop();
     }
